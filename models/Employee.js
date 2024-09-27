@@ -9,7 +9,8 @@ const employeeSchema = new Schema(
     designation: { type: String, reqired: true },
     gender: { type: String, required: true },
     course: { type: String, required: true },
-    img: { type: String, required: true },
+    courses: { type: Schema.Types.Mixed, required: true },
+    image: { type: Schema.Types.Mixed, required: true },
   },
   { timestamps: true }
 );

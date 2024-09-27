@@ -5,6 +5,7 @@ const employeeController = require("../controllers/Employee");
 router
   .post("/create-employee", employeeController.create)
   .post("/update-employee/:id", employeeController.update)
-  .get("/get-employee", employeeController.getAll);
+  .get("/get-employee", employeeController.getAll)
+  .delete("/delete-employee", employeeController.deleteEmployee);
 
 exports.router = router;
