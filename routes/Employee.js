@@ -6,6 +6,6 @@ router
   .post("/create-employee", employeeController.create)
   .post("/update-employee/:id", employeeController.update)
   .get("/get-employee", employeeController.getAll)
-  .delete("/delete-employee", employeeController.deleteEmployee);
+  .delete("/delete-employee/:id", employeeController.deleteEmployee);
 
 exports.router = router;
