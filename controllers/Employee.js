@@ -3,7 +3,7 @@ const Employee = model.Employee;
 
 // CREATE...
 exports.create = async (req, res) => {
-  console.log(req.body);
+  console.log(req.body, req.file);
   const employee = new Employee(req.body);
 
   try {
@@ -15,7 +15,7 @@ exports.create = async (req, res) => {
   }
 };
 
-// READ...
+// READ ALL...
 exports.getAll = async (req, res) => {
   let query = await Employee.find({});
   console.log(query);
@@ -25,10 +25,22 @@ exports.getAll = async (req, res) => {
     res.status(400).json(err);
   }
 };
-// UPDATE...
-exports.update = async (req, res) => {
+// READ ONE...
+exports.getEmployeeById = async (req, res) => {
   const { id } = req.params;
 
+  try {
+    const response = await Employee.findById(id);
+    res.status(200).json(response);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+};
+// UPDATE...
+exports.update = async (req, res) => {
+  console.log("hjhjhjh");
+  const { id } = req.params;
+  console.log(id, req.body);
   try {
     const employee = await Employee.findByIdAndUpdate(id, req.body, {
       new: true,
@@ -42,13 +54,19 @@ exports.update = async (req, res) => {
 };
 // DELETE...
 exports.deleteEmployee = async (req, res) => {
+  console.log(req.params);
   const { id } = req.params;
+
   try {
-    const doc = await Employee.findOneAndDelete({ _id: id }).populate(
-      "employee"
-    );
+    console.log("oooo");
+    const doc = await Employee.findOneAndDelete({ _id: id });
+    console.log("gggg");
+    console.log(doc);
+
     res.status(200).json(doc);
   } catch (err) {
+    console.log("error hai");
+    console.log(err);
     res.status(400).json(err);
   }
 };

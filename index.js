@@ -12,6 +12,7 @@ const path = require("path");
 const LocalStrategy = require("passport-local").Strategy;
 const passport = require("passport");
 const cookieParser = require("cookie-parser");
+const multer = require("multer");
 const JwtStrategy = require("passport-jwt").Strategy,
   ExtractJwt = require("passport-jwt").ExtractJwt;
 
@@ -25,7 +26,8 @@ async function main() {
 // SH AND JSON PARSING MW
 app.use(express.static(path.resolve(__dirname, "build")));
 app.use(express.json());
-
+// for file upload
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use(
   cors({
     exposedHeaders: ["X-Total-Count"],
